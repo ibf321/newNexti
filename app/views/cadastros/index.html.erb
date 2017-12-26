@@ -1,0 +1,62 @@
+<script src="//rawgithub.com/stidges/jquery-searchable/master/dist/jquery.searchable-1.0.0.min.js"></script>
+ 
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">        
+          <h1 align="center" class="enunciado">Cadastros</h1>       
+      </div>
+    </div>
+    <br>
+    <center>
+        <%= render 'search' %> 
+    </center>
+  <br>
+  <br>
+  <br>
+  <div>
+    <div class="col-lg-12 ">
+      <table class="table table-striped ">
+        <thead >
+          <tr class="titulotabela" style="height: 30px;">
+            <th class="colunacontador"  style="border-color: black">#</th>           
+            <th style="border-color: black; text-align: center;">Id Cliente ENEL</th>
+            <th style="border-color: black; text-align: center;" width="20px">Codigo Ocorrencia</th>
+            <th style="border-color: black; text-align: center;" width="100px">Valor</th>
+            <th style="border-color: black; text-align: center;">Parcelas</th>
+            <%if current_user.role == "admin" %>
+            <th style="border-color: black; text-align: center;">Autor</th>
+            <%end%>
+            <th style="border-color: black; text-align: center;">Data do Cadastro</th>   
+            <th class="border-right-1" colspan="2" style="border-color: black; text-align: center;">Protocolo</th>            
+            <th style="border-color: black; text-align: center;"><h4><span class="badge badge-pill badge-info">Total de registros <span class="badge badge-warning"> <%= @cadastros.total_count %> </span></span></h4></th>     
+            
+          </tr>
+        </thead>
+        <tbody>
+       
+          <% @cadastros.each_with_index do |cadastro, x| %>
+          <tr>
+            <%if current_user.id == cadastro.user_id || policy(@cadastros).index? %>
+            <td class="colunacontador"><%= x + 1 %></td>
+            <td class="conteudotabela"><%= cadastro.id_cliente_coelce %></td>
+            <td class="conteudotabela"><%= cadastro.codigo_ocorrencia %></td>                  
+            <td class="conteudotabela"> R$ <%= cadastro.valor %></td>
+            <td align="center" class="conteudotabela"><%= cadastro.parcelas %></td>
+            <%if current_user.role == "admin"%>
+            <td><span class="badge badge-pill badge-info"><%= cadastro.user.username%></span></td>
+            <% end %>
+            <td align="center" class="conteudotabela"><%= cadastro.data_ocorrencia.strftime("%d / %m / %Y") %></td>
+            
+            <td align="center" colspan="2" class="conteudotabela "><%= cadastro.livre %></td>            
+            <td align="center">
+              <%= link_to'Ver', cadastro,class: 'btn btn-info btn-sm' %>
+              <%= link_to 'Editar', edit_cadastro_path(cadastro),class: 'btn btn-success btn-sm'%>  
+            </td>          
+        </tr>
+        <% end %>
+        <% end %>
+      </tbody>
+    </table>    
+  </div>  
+</div>
+<div class="paginacao"><%= paginate @cadastros %></div>

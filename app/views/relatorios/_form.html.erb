@@ -1,0 +1,38 @@
+<%= form_for(@relatorio) do |f| %>
+<% if @relatorio.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@relatorio.errors.count, "error") %> prohibited this cadastro from being saved:</h2>
+  <ul>
+    <% @relatorio.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<br>
+<div class="container-fluid col-xl-4 rounded border border-secondary"  style="background-color: #FAFAFA;">
+  <div >
+    <h1 align="center" class="enunciado">Relatório</h1>
+  </div>
+  <br>
+  <fieldset>
+    <div class="container-fluid col-xl-5">
+      <div>
+        <b class="textolabels">Data Inicial</b>
+        <p class="label-info">Selecione a Data Inicial</p>
+        <%= f.date_select  :data_inicio, :order => [:day, :month, :year], :use_month_names=>["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]%>
+        <br> <br>
+        <b class="textolabels">Data Final</b>
+        <p class="label-info">Selecione a Data Final</p>
+        <%= f.date_select :data_final, :order => [:day, :month, :year], :use_month_names=>["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]%>
+        <br>
+        <br>
+        <div class="btn" align="center">
+          <%=f.submit "Salvar", class:"btn btn-primary"%>
+          <%=link_to 'Cancelar', root_path, class: 'btn btn-warning'%>
+        </div>
+      </fieldset>       
+    </div>
+  </div>
+  <% end %>

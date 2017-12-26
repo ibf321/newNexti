@@ -1,0 +1,36 @@
+
+<div class="container-fluid col-xl-4  rounded border border-secondary" style="background-color: #FAFAFA;">
+<br>
+<h1 align="center" class="enunciado ">Informações do Colaborador </h1>
+<br>
+<br>
+    <div>
+      <div><b class="textoshow">Nome Completo: </b>&nbsp;<texto> <%= @colaborador.nomecompleto %></texto> </div>
+    </div>
+    <br>
+    <div>
+      <div><b class="textoshow">Telefone:</b>&nbsp; <texto><%= @colaborador.telefone %></texto></div>
+    </div>
+    <br>
+    <div>
+      <div><b class="textoshow">Endereço: </b> &nbsp;<texto><%= @colaborador.endereco %></texto> </div>
+    </div>
+    <br>
+    <div >
+      <div ><b class="textoshow">Nome Reduzido:&nbsp; </b><texto> <%= @colaborador.nomereduzido %></texto> </div>
+    </div>
+    <br>
+    <div>
+      <div><b class="textoshow">Cadastrado Por: </b>&nbsp;<texto> <%= @colaborador.user.username %></texto> </div>
+    </div>
+
+    <br>
+   <center>
+     <td>
+        <%= link_to 'Editar', edit_colaborador_path(@colaborador), class:"btn btn-success" %>
+        <%= link_to 'Voltar', colaboradors_path, class:"btn btn-warning" %>
+        <%= link_to 'Cadastrar Novo', new_colaborador_path, class:"btn btn-info" %>
+  </center>
+  <br>
+  </div>
+</div>

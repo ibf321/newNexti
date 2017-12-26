@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-header">
+          <h1 align="center" class="enunciado">Contagem Colaboradores</h1>
+        </div>
+      </div>
+    </div>
+        
+  <br>
+  <br>
+  <br>
+  
+    <% if !@data_inicio.blank? and !@data_final.blank? %>
+      <% if @data_inicio > @data_final %>
+        <center><div class="alert alert-danger" role="alert" style="width: 700px">
+          <p class="alert-danger" style="font-size: 20px">A data de início não pode ser maior que a data final !</p>
+        </div></center>
+      <% end %>
+    <% end %>
+  
+
+  <%= render 'formrelatorio' %>
+  <br>
+  <br>
+<div class="row">
+    <div class="col-lg-12">
+      <table class="table table-striped">
+        <thead>
+          <tr>           
+            <th>Colaborador</th>
+            <th style="text-align: center;" width="25%">Qtd de Cadastros</th>
+            <th>Valor</th>
+           <!-- <th>Colaborador ID</th>-->            
+          </tr>
+  </thead>
+
+  <tbody>
+    <% @colabs.each do |colab| %>
+      <tr style="font-size: 15px">
+       <% if !@data_inicio.blank? and !@data_final.blank? %>
+          <td width="400px"><%= colab.nomecompleto %></td>
+          <td style="text-align: center;"><%= colab.count %></td>
+          <td>R$ <%= colab.valor%></td>     
+      <%else%>
+          <td  width="300px"><%= colab.nomecompleto %>
+          <td style="text-align: center;"><%= colab.count %></td>
+          <td>R$ <%= colab.valor%></td>
+      <%end%> 
+            
+      </tr>
+
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+</div>
